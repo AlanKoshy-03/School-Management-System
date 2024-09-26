@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        footer {
+            background-color: #282c34;
+            color: #61dafb;
+            padding: 20px 0; /* Increased padding */
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .container {
+            padding: 20px;
+            min-height: 80vh; /* Leave space for the larger footer */
+            box-sizing: border-box;
+        }
+        .footer-links {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* Increased gap between links */
+        }
+        .footer-links li a {
+            color: #61dafb;
+            text-decoration: none;
+            font-size: 1.5em; /* Increased font size */
+            transition: color 0.3s ease;
+        }
+        .footer-links li a:hover {
+            text-decoration: underline;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+        <!-- Main content will be injected here -->
+        {% endblock %}
+    </div>
+
+    <footer>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'student_list' %}">Student List</a></li>
+            <li><a href="{% url 'enrollment_list' %}">Enrollment List</a></li>
+            <li><a href="{% url 'teacher_list' %}">Teacher List</a></li>
+            <li><a href="{% url 'attendance_list' %}">Attendance List</a></li>
+            <li><a href="{% url 'class_list' %}">Class List</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

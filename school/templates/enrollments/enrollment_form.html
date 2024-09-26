@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment List</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block title %}
+    Attendance List
+    {% endblock %}
+
+    {% block content %}
+    <h1>Enrollment List</h1>
+    <a href="{% url 'enrollment_add' %}">Add Enrollment</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student</th>
+                <th>Class</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enrollment in enrollments %}
+            <tr>
+                <td>{{ enrollment.enrollmentid }}</td>
+                <td>{{ enrollment.student.firstname }} {{ enrollment.student.lastname }}</td>
+                <td>{{ enrollment.cls.classname }}</td>
+                <td>{{ enrollment.enrollment_date }}</td>
+                <td>
+                    <a href="{% url 'enrollment_update' enrollment.enrollmentid %}">Update</a>
+                    <a href="{% url 'enrollment_delete' enrollment.enrollmentid %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+</body>
+</html>

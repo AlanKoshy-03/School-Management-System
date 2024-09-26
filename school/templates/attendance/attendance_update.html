@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #007BFF;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-field {
+            margin-bottom: 15px;
+        }
+
+        .form-field input,
+        .form-field select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .form-field input[readonly] {
+            background-color: #f1f1f1;
+            cursor: not-allowed;
+        }
+
+        button[type="submit"],
+        button[type="button"] {
+            padding: 12px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"] {
+            background-color: #28a745;
+            color: white;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        button[type="button"] {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        button[type="button"]:hover {
+            background-color: #c82333;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ title }}</h1>
+        <p>{{ attendance_details }}</p>  <!-- Displaying attendance details -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-field">
+                <label for="studentid">Student Name:</label>
+                {{ form.studentid }}
+            </div>
+            <div class="form-field">
+                <label for="attendancedate">Attendance Date:</label>
+                {{ form.attendancedate }}
+            </div>
+            <div class="form-field">
+                <label for="status">Status:</label>
+                {{ form.status }}
+            </div>
+            <button type="submit">Update Attendance</button>
+            <button type="button" onclick="window.location.href='{% url 'attendance_list' %}'">Cancel</button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

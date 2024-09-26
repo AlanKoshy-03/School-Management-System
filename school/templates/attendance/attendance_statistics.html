@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Attendance Statistics{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f2f2f2; /* Light gray background */
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px; /* More space below heading */
+            text-align: center; /* Center align the heading */
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #555; /* Softer text color */
+            text-align: center; /* Center align the paragraphs */
+        }
+
+        form {
+            margin: 20px auto; /* Center the form */
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* Limit width for better spacing */
+        }
+
+        label {
+            font-weight: bold;
+            display: block; /* Each label on a new line */
+            margin: 10px 0 5px; /* Spacing around labels */
+        }
+
+        select, button {
+            padding: 10px;
+            margin-top: 10px; /* Spacing between elements */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%; /* Full width for inputs */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker on hover */
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center; /* Center align error messages */
+        }
+    </style>
+
+    <h1>Attendance Statistics</h1>
+
+    <p>Total Attendance Records: {{ total_attendance }}</p>
+    <p>Total Present: {{ present_count }}</p>
+    <p>Total Absent: {{ absent_count }}</p>
+    <p>Attendance Percentage: {{ attendance_percentage }}%</p>
+
+    <form method="post" action="{% url 'select_student_for_attendance' %}" id="student-selection-form">
+        {% csrf_token %}
+        <label for="student-select">Select Student:</label>
+        <select name="student_id" id="student-select" required>
+            <option value="">--Select a Student--</option>
+            {% for student in students %}
+                <option value="{{ student.studentid }}">{{ student.firstname }} {{ student.lastname }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+
+{% endblock %}

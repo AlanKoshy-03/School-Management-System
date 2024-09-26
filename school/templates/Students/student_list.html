@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4; /* Background color for the body */
+            padding-bottom: 100px; /* Added padding to the bottom */
+        }
+
+        h1 {
+            text-align: center; /* Centered heading */
+            color: #333; /* Color for the heading */
+        }
+
+        .table-container {
+            max-width: 1000px; /* Maximum width for the table container */
+            margin: 0 auto; /* Center the container */
+            background-color: white; /* Background color for the table */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            overflow: hidden; /* Prevent overflow */
+            border: 2px solid #333; /* Outline for the table */
+        }
+
+        table {
+            width: 100%; /* Full width table */
+            border-collapse: collapse; /* Collapse borders */
+            margin: 20px 0; /* Margin above and below the table */
+        }
+
+        th, td {
+            padding: 12px; /* Padding for table cells */
+            text-align: left; /* Align text to the left */
+            border: 1px solid #ddd; /* Border for table cells */
+        }
+
+        th {
+            background-color: #007BFF; /* Header background color */
+            color: white; /* Header text color */
+        }
+
+        tr:hover {
+            background-color: #f1f1f1; /* Row hover effect */
+        }
+
+        button {
+            padding: 10px 15px; /* Button padding */
+            margin: 5px; /* Margin around buttons */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 14px; /* Font size for buttons */
+        }
+
+        button.update {
+            background-color: #2196F3; /* Update button color */
+            color: white; /* Update button text color */
+        }
+
+        button.delete {
+            background-color: #f44336; /* Delete button color */
+            color: white; /* Delete button text color */
+        }
+
+        button.comments-list {
+            background-color: #4CAF50; /* Comments List button color */
+            color: white; /* Comments List button text color */
+            display: block; /* Make the button block-level */
+            margin: 20px auto; /* Center the button with auto margin */
+            width: 200px; /* Set a fixed width for the button */
+            text-align: center; /* Center the text inside the button */
+        }
+
+        .error-message {
+            color: red; /* Error message color */
+            text-align: center; /* Center the error message */
+            margin: 20px; /* Margin around the error message */
+        }
+
+        .footer-space {
+            height: 50px; /* Space added at the bottom */
+        }
+
+        .action-buttons {
+            display: flex; /* Flexbox for buttons */
+            justify-content: flex-start; /* Align buttons to the left */
+        }
+
+        .action-buttons a {
+            margin: 0 5px; /* Adjusted margin between buttons */
+        }
+    </style>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block title %}
+    {% endblock %}
+
+    {% block content %}
+    <h1>Student List</h1>
+
+    {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+
+    <div class="table-container">
+        <table id="studentsTable">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Birth Date</th>
+                    <th>Gender</th>
+                    <th>Class Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.studentid }}</td>
+                    <td>{{ student.firstname }}</td>
+                    <td>{{ student.lastname }}</td>
+                    <td>{{ student.birthdate|date:"d/m/Y" }}</td>
+                    <td>{{ student.get_gender_display }}</td>
+                    <td>{{ student.class_name }}</td>
+                    <td class="action-buttons">
+                        <a href="{% url 'update_student' student.studentid %}">
+                            <button class="update">Update</button>
+                        </a>
+                        <a href="{% url 'delete_student' student.studentid %}">
+                            <button class="delete">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{% url 'comments_list' %}">
+        <button class="comments-list">Comments List</button>
+    </a>
+
+    <div class="footer-space"></div> <!-- Extra space at the bottom -->
+
+    {% endblock %}
+</body>
+</html>

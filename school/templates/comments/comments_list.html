@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Comments List{% endblock %}
+
+{% block content %}
+<h1>Comments List</h1>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.table-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+</style>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Comment ID</th>
+                <th>Student Name</th>
+                <th>Comment</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                <td>{{ comment.commentid }}</td>
+                <td>{{ comment.studentid.firstname }} {{ comment.studentid.lastname }}</td>
+                <td>{{ comment.comment_text }}</td>
+                <td>{{ comment.created_at }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align: center;">No comments found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

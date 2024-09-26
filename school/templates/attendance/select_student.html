@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Attendance for {{ selected_student.firstname }}{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f2f2f2; /* Light gray background */
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px; /* More space below heading */
+            text-align: center; /* Center align the heading */
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #555; /* Softer text color */
+            text-align: center; /* Center align the paragraphs */
+            margin: 10px 0; /* Add vertical spacing between paragraphs */
+        }
+
+        .attendance-stats {
+            background-color: #fff; /* White background for stats */
+            padding: 20px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            max-width: 600px; /* Limit width */
+            margin: 0 auto; /* Center align the stats box */
+        }
+    </style>
+
+    <div class="attendance-stats">
+        <h1>Attendance Statistics for {{ selected_student.firstname }} {{ selected_student.lastname }}</h1>
+        <p>Total Attendance Records: {{ student_total_attendance }}</p>
+        <p>Total Present: {{ student_present_count }}</p>
+        <p>Total Absent: {{ student_absent_count }}</p>
+        
+        {% if attendance_percentage is not None %}
+            <p>Attendance Percentage: {{ attendance_percentage|floatformat:2 }}%</p>
+        {% else %}
+            <p>Attendance Percentage: N/A</p>
+        {% endif %}
+    </div>
+{% endblock %}

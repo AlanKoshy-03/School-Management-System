@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .er-diagram {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 1000px;
+            overflow-x: auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .er-diagram img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    
+    {% block title %}
+    Attendance List
+    {% endblock %}
+
+    {% block content %}
+    <h1 style="padding: 100px; padding-bottom: 10px; margin-left: 290px;">Welcome to the School Management System</h1>
+    <div class="er-diagram" style="padding: 100px; padding-top: 10px; margin-left: 360px;">
+        <img src="{% static 'Schema.svg' %}" alt="ER Diagram">
+        <!--<img src="{% static 'Schema.jpg' %}" alt="Test Image">
+    -->
+    </div>
+    {% endblock %}
+</body>
+</html>

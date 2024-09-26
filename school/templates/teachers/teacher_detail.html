@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Detail</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block title %}
+    {% endblock %}
+
+    {% block content %}
+    <h1>Teacher Detail</h1>
+    <p><strong>Teacher ID:</strong> {{ teacher.teacherid }}</p>
+    <p><strong>First Name:</strong> {{ teacher.firstname }}</p>
+    <p><strong>Last Name:</strong> {{ teacher.lastname }}</p>
+    <p><strong>Subject:</strong> {{ teacher.subject }}</p>
+    <a href="{% url 'teacher_update' teacher.teacherid %}">Update</a>
+    <a href="{% url 'teacher_list' %}">Back to List</a>
+    {% endblock %}
+</body>
+</html>
